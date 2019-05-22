@@ -1,42 +1,37 @@
 package com.example.wait.democopsboot.user;
 
 import java.util.Set;
-import java.util.UUID;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.example.wait.orm.jpa.AbstractEntity;
+
 @Entity
 @Table(name = "copsboot_user")
-public class User {
-	@Id
-	private UUID id;
+public class User extends AbstractEntity<UserId> {
+
 	private String email;
 	private String password;
-	
+
 	@ElementCollection
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	private Set<UserRole> roles;
-	
+
 	protected User() {
-		
+
 	}
 
-	public User(UUID id, String email, String password, Set<UserRole> roles) {
-		this.id = id;
+	public User(UserId id, String email, String password, Set<UserRole> roles) {
+		super(id);
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
-	}
-
-	public UUID getId() {
-		return id;
 	}
 
 	public String getEmail() {
