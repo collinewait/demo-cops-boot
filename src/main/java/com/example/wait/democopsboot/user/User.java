@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.example.wait.orm.jpa.AbstractEntity;
+import com.google.common.collect.Sets;
 
 @Entity
 @Table(name = "copsboot_user")
@@ -32,6 +33,18 @@ public class User extends AbstractEntity<UserId> {
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
+	}
+
+	public static User createOfficer(UserId userId, String email,
+			String encodedPassword) {
+		return new User(userId, email, encodedPassword,
+				Sets.newHashSet(UserRole.OFFICER));
+	}
+
+	public static User createCaptain(UserId userId, String email,
+			String encodedPassword) {
+		return new User(userId, email, encodedPassword,
+				Sets.newHashSet(UserRole.CAPTAIN));
 	}
 
 	public String getEmail() {
