@@ -15,28 +15,18 @@ import java.util.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.example.wait.democopsboot.infrastructure.SpringProfiles;
-import com.example.wait.democopsboot.infrastructure.security.OAuth2ServerConfiguration;
-import com.example.wait.democopsboot.infrastructure.security.SecurityConfiguration;
-import com.example.wait.democopsboot.infrastructure.security.StubUserDetailsService;
+import com.example.wait.democopsboot.infrastructure.test.CopsbootControllerTest;
 import com.example.wait.democopsboot.user.UserService;
 import com.example.wait.democopsboot.user.Users;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(UserRestController.class)
-@ActiveProfiles(SpringProfiles.TEST)
+@CopsbootControllerTest(UserRestController.class)
 public class UserRestControllerTest {
 
 	@Autowired
@@ -90,20 +80,5 @@ public class UserRestControllerTest {
 				.andExpect(jsonPath("roles").isArray())
 				.andExpect(jsonPath("roles[0]").value("OFFICER"));
 		verify(service).createOfficer(email, password);
-	}
-
-	@TestConfiguration
-	@Import(OAuth2ServerConfiguration.class)
-	static class TestConfig {
-		@Bean
-		public UserDetailsService userDetailsService() {
-			return new StubUserDetailsService();
-		}
-
-		@Bean
-		public SecurityConfiguration securityConfiguration() {
-			return new SecurityConfiguration();
-		}
-
 	}
 }
