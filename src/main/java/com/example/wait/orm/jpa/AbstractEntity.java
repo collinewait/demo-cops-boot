@@ -1,12 +1,14 @@
 package com.example.wait.orm.jpa;
 
-import com.example.wait.util.ArtifactForFramework;
+import static com.google.common.base.MoreObjects.toStringHelper;
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.util.Objects;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.MappedSuperclass;
-import java.util.Objects;
-import static com.google.common.base.MoreObjects.toStringHelper;
-import static com.google.common.base.Preconditions.checkNotNull;
+
+import com.example.wait.util.ArtifactForFramework;
 
 /**
  * Abstract super class for entities. We are assuming that early primary key

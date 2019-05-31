@@ -1,10 +1,9 @@
 package com.example.wait.democopsboot.user;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.Optional;
-import java.util.UUID;
-
-public interface UserRepository extends CrudRepository<User, UUID>, UserRepositoryCustom {
+public interface UserRepository extends CrudRepository<User, UserId>, UserRepositoryCustom {
 	Optional<User> findByEmailIgnoreCase(String email);
 }
