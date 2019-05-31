@@ -43,6 +43,7 @@ public class OAuth2ServerConfiguration {
 
 			http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/api/**")
 					.permitAll().and().antMatcher("/api/**").authorizeRequests()
+					.antMatchers(HttpMethod.POST, "/api/users").permitAll()
 					.anyRequest().authenticated();
 		}
 	}
