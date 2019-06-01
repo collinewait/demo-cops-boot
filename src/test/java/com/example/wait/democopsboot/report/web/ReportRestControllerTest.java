@@ -47,7 +47,7 @@ public class ReportRestControllerTest {
 				.parse("2018-04-11T22:59:03.189+02:00");
 		String description = "This is a test report description.";
 		CreateReportParameters parameters = new CreateReportParameters(dateTime,
-				description);
+				description, false, 0);
 		when(service.createReport(eq(Users.officer().getId()),
 				any(ZonedDateTime.class), eq(description)))
 						.thenReturn(new Report(new ReportId(UUID.randomUUID()),
