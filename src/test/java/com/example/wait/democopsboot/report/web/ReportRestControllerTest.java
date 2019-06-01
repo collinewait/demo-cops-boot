@@ -7,6 +7,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -45,7 +46,7 @@ public class ReportRestControllerTest {
 				Users.OFFICER_PASSWORD);
 		ZonedDateTime dateTime = ZonedDateTime
 				.parse("2018-04-11T22:59:03.189+02:00");
-		String description = "This is a test report description.";
+		String description = "The suspect is wearing a black hat.";
 		CreateReportParameters parameters = new CreateReportParameters(dateTime,
 				description, false, 0);
 		when(service.createReport(eq(Users.officer().getId()),
@@ -57,7 +58,7 @@ public class ReportRestControllerTest {
 				.header(HEADER_AUTHORIZATION, bearer(accessToken))
 				.contentType(MediaType.APPLICATION_JSON_UTF8)
 				.content(objectMapper.writeValueAsString(parameters)))
-				.andExpect(status().isCreated())
+				.andDo(print()).andExpect(status().isCreated())
 				.andExpect(jsonPath("id").exists())
 				.andExpect(jsonPath("reporter").value(Users.OFFICER_EMAIL))
 				.andExpect(jsonPath("dateTime")
