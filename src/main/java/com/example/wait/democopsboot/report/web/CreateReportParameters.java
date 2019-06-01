@@ -1,0 +1,15 @@
+package com.example.wait.democopsboot.report.web;
+
+import java.time.ZonedDateTime;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CreateReportParameters {
+	private ZonedDateTime dateTime;
+	private String description;
+}
