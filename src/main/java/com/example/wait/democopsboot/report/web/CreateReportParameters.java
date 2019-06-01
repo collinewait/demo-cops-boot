@@ -11,5 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateReportParameters {
 	private ZonedDateTime dateTime;
+
+	@ValidReportDescription
 	private String description;
 }
